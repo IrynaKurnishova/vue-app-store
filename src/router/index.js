@@ -4,10 +4,14 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      name: 'Home',
+      redirect: {name: 'ProductList'}
+    },
+    {
       path: '/products',
-      name: 'ProductsList',
+      name: 'ProductList',
       component: () => import('../views/ProductList.vue'),
-      redirect: '/'
     },
     {
       path: '/product-list-item',
@@ -18,6 +22,11 @@ const router = createRouter({
       path: '/products-cart',
       name: 'ProductsCart',
       component: () => import('../views/ProductsCart.vue')
+    },
+    {
+      path: '/product-details/:id',
+      name: 'ProductDetails',
+      component: () => import('../views/ProductDetails.vue')
     },
   ]
 })

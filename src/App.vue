@@ -6,6 +6,7 @@ import Home from "@/views/ProductList.vue";
   <header>
     <div class="wrapper">
         <Home/>
+        <router-view/>
     </div>
   </header>
 </template>
