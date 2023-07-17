@@ -1,7 +1,7 @@
 <script setup>
 import axios from '@/axios'
 import { onBeforeMount, ref } from 'vue'
-import ProductListItem from '@/views/ProductListItem.vue'
+import ProductListItem from '@/components/ProductListItem.vue'
 
 const productList = ref([])
 const isLoading = ref(false)
