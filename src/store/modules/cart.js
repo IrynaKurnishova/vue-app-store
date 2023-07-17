@@ -47,6 +47,9 @@ export default {
       if (index !== -1) {
         state.cart[index].quantity--
       } else this.ADD_PRODUCT_TO_CART(state, product)
+
+      const transformedCart = JSON.stringify(state.cart)
+      localStorage.setItem('cart', transformedCart)
     }
   },
   actions: {
