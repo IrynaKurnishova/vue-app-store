@@ -8,8 +8,8 @@ const cartItems = computed(() => store.getters.cartItems)
 const total = computed(() => store.getters.totalPrice + '$')
 const totalQuantityItems = computed(() => store.getters.totalItemsInCart)
 const isSingleItemInCart = (id) => {
-  const itemWithId = cartItems.value.filter((item) => item.id === id)
-  return itemWithId.length === 1
+  const product = cartItems.value.find((product) => product.id === id)
+  return product?.quantity === 1
 }
 
 const addItemToCard = (product) => {
@@ -27,7 +27,7 @@ const changeQuantity = (product) => {
 
 <template>
   <div>
-    <h3 class="mb-3 pl-8">Your product cart</h3>
+    <h3 class="mb-3 pl-8 mt-3">Your product cart</h3>
     <v-list>
       <v-list-item v-for="product in cartItems" :key="product.id">
         <v-row align="center">
@@ -43,28 +43,29 @@ const changeQuantity = (product) => {
               <v-list-item-title class="mt-3">
                 {{ product.name }}
               </v-list-item-title>
-              <v-list-item-title class="mt-3">
-                {{ product.quantity }} item - Price: {{ product.price }}$
-              </v-list-item-title>
+              <v-list-item-title class="mt-3"> Price: {{ product.price }}$ </v-list-item-title>
               <router-link
                 :to="{
                   name: 'ProductDetails',
-                  params: { id: product.id, product: product }
+                  params: { id: product.id }
                 }"
+                class="mt-3 mr-3"
               >
                 More info
               </router-link>
-              <v-btn @click="addItemToCard(product)">+</v-btn>
+              <v-btn @click="addItemToCard(product)" density="compact" icon="mdi-plus"></v-btn>
+              {{ product.quantity }}
               <v-btn
-                :class="isSingleItemInCart(product.id) ? 'disabled' : ''"
+                :disabled="isSingleItemInCart(product.id)"
                 @click="changeQuantity(product)"
-                >-</v-btn
-              >
+                density="compact"
+                icon="mdi-minus"
+              ></v-btn>
             </v-list-item-content>
           </v-col>
           <v-col cols="1">
             <v-btn @click="removeItemFromCard(product)">
-              <v-icon>mdi-delete</v-icon>
+              <v-icon class="text-red">mdi-delete</v-icon>
             </v-btn>
           </v-col>
         </v-row>
@@ -86,10 +87,5 @@ const changeQuantity = (product) => {
 .card-image {
   max-height: 100px;
   max-width: 100px;
-}
-.disabled {
-  pointer-events: none;
-  opacity: 1;
-  cursor: not-allowed;
 }
 </style>
