@@ -37,8 +37,7 @@ const addItemToCard = (product) => {
               <router-link
                 :to="{
                   name: 'ProductDetails',
-                  params: { id: product.id, product: product },
-                  props: true
+                  params: { id: product.id }
                 }"
               >
                 More info
