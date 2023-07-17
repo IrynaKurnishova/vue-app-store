@@ -6,17 +6,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'Home',
-      redirect: {name: 'ProductList'}
+      redirect: { name: 'ProductList' }
     },
     {
       path: '/products',
       name: 'ProductList',
-      component: () => import('../views/ProductList.vue'),
-    },
-    {
-      path: '/product-list-item',
-      name: 'ProductListItem',
-      component: () => import('../views/ProductListItem.vue')
+      component: () => import('../views/ProductList.vue')
     },
     {
       path: '/products-cart',
@@ -27,7 +22,7 @@ const router = createRouter({
       path: '/product-details/:id',
       name: 'ProductDetails',
       component: () => import('../views/ProductDetails.vue')
-    },
+    }
   ]
 })
 
