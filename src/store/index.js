@@ -1,21 +1,10 @@
-import {createStore} from "vuex";
+import { createStore } from 'vuex'
+import cart from './modules/cart'
 
 const store = createStore({
-    state() {
-        return {
-            products: []
-        }
-    },
-    // actions: {
-    //     async fetchProducts() {
-    //         try {
-    //             return await $axios.get('/products')
-    //         } catch (error) {
-    //             console.log('Error', error)
-    //         }
-    //     }
-    // },
+  modules: {
+    cart
+  }
 })
 
 export default store
-
