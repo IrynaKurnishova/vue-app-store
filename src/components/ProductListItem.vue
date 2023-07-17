@@ -12,7 +12,7 @@ const productPrice = computed(() => {
 
 const store = useStore()
 
-const addItemToCard = (product) => {
+const addItemToBasket = (product) => {
   store.dispatch('addProductToCart', product)
 }
 </script>
@@ -43,7 +43,7 @@ const addItemToCard = (product) => {
                 More info
               </router-link>
             </div>
-            <v-btn class="btn btn-primary" @click="addItemToCard(product)">Add to cart</v-btn>
+            <v-btn class="btn btn-primary" @click="addItemToBasket(product)">Add to cart</v-btn>
           </v-card-body>
         </v-col>
       </v-row>

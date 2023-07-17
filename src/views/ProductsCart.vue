@@ -11,15 +11,12 @@ const isSingleItemInCart = (id) => {
   const product = cartItems.value.find((product) => product.id === id)
   return product?.quantity === 1
 }
-
-const addItemToCard = (product) => {
+const addItemToBasket = (product) => {
   store.dispatch('addProductToCart', product)
 }
-
-const removeItemFromCard = ({ id }) => {
+const removeItemFromBasket = ({ id }) => {
   store.dispatch('removeProductFromCart', id)
 }
-
 const changeQuantity = (product) => {
   store.dispatch('changeQuantityInCart', product)
 }
@@ -53,7 +50,7 @@ const changeQuantity = (product) => {
               >
                 More info
               </router-link>
-              <v-btn @click="addItemToCard(product)" density="compact" icon="mdi-plus"></v-btn>
+              <v-btn @click="addItemToBasket(product)" density="compact" icon="mdi-plus"></v-btn>
               {{ product.quantity }}
               <v-btn
                 :disabled="isSingleItemInCart(product.id)"
@@ -64,7 +61,7 @@ const changeQuantity = (product) => {
             </v-list-item-content>
           </v-col>
           <v-col cols="1">
-            <v-btn @click="removeItemFromCard(product)">
+            <v-btn @click="removeItemFromBasket(product)">
               <v-icon class="text-red">mdi-delete</v-icon>
             </v-btn>
           </v-col>
