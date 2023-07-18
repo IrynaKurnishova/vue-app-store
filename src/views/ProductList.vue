@@ -1,24 +1,41 @@
 <script setup>
-import {RouterLink} from "vue-router";
-import axios from "@/axios";
+import axios from '@/axios'
+import { onBeforeMount, ref } from 'vue'
+import ProductListItem from '@/components/ProductListItem.vue'
 
-import {onBeforeMount} from "vue";
+const productList = ref([])
+const isLoading = ref(false)
 
+onBeforeMount(async () => {
+  isLoading.value = true
+  const { data } = await axios.get('/products')
 
- onBeforeMount(async () => {
-    const products = await axios.get('/products')
-     console.log(products)
+  productList.value = data
+
+  isLoading.value = false
 })
 </script>
 
 <template>
-    <div>Main Page with list of Products</div>
-    <div>Product name</div>
-    <div>Product price</div>
-    <div>Product img</div>
-    <button>Bootstrap button: add to cart</button>
-    <nav>
-        <RouterLink to="/productInfo">Products</RouterLink>
-    </nav>
+  <div>
+    <div v-if="!isLoading">
+      <ProductListItem v-for="(product, index) in productList" :key="index" :product="product" />
+    </div>
+    <div v-else>
+      <div class="d-flex justify-center align-center item-loader">
+        <v-progress-circular
+          class="progress-loader"
+          :size="50"
+          :width="7"
+          indeterminate
+        ></v-progress-circular>
+      </div>
+    </div>
+  </div>
 </template>
 
+<style scoped>
+.item-loader {
+  height: 100vh;
+}
+</style>

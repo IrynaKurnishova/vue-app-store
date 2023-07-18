@@ -1,11 +1,12 @@
 <script setup>
-import Home from "@/views/ProductList.vue";
+import NavbarHeader from '@/components/NavbarHeader.vue'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-        <Home/>
-    </div>
-  </header>
+  <v-app>
+    <NavbarHeader />
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
